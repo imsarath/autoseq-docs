@@ -1,0 +1,20 @@
+site_name: Autoseq 2.0
+site_url: ""
+site_description: Autoseq documentation .
+site_author: Clinseq Team
+
+repo_url: https://github.com/ClinSeq/autoseq
+edit_uri: ""
+
+nav :
+  - Autoseq: index.md
+  - Quick Start: autoseq.md
+  - Work Flow: pipeline.md
+  
+
+theme:
+    name: readthedocs
+    highlightjs: true
+    hljs_languages:
+        - python
+        - rust
