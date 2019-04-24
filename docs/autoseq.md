@@ -5,14 +5,11 @@ Autoseq is a command line tool and it has multiple pipelines used to analyse can
 Piplines
 
  * Alascca
- * Liqbio *(UMI tag processing)*
+ * Liqbio
  * RNAseq (under development)
 
-*Latest version: [v0.6.0][dist]*
+*Current version: [v0.6.0][dist]*
 
-Note:
-
-  **This version of autoseq is specially updated for PROBIO trail on prostate cancer.**
 
 Installation
 -------------
@@ -20,17 +17,17 @@ Installation
 Step 1: Clone the alascca-dotfiles repo
 
 ```sh
-git clone https://github.com/clinseq/probio-dotfiles.git /nfs/PROBIO/probio-dotfiles
+git clone https://github.com/clinseq/alascca-dotfiles.git /nfs/ALASCCA/alascca-dotfiles
 ```
 Step 2: Go to dotfiles directory
 
 ```sh
-cd /nfs/PROBIO/probio-dotfiles
+cd /nfs/ALASCCA/alascca-dotfiles
 ```
 Step 3: Run the `.bash_profile` file to create new environment
 
 ```sh
-. /nfs/PROBIO/probio-dotfiles/.bash_profile
+. /nfs/ALASCCA/alascca-dotfiles/.bash_profile
 ```
 
 Step 4: Run this script to install all prerequisites
@@ -41,6 +38,8 @@ bash install-prereqs.sh
 
 Command Line Usage
 ------------------
+
+Usage:
 
 ```sh
 Usage: autoseq [OPTIONS] COMMAND [ARGS]...
@@ -55,42 +54,34 @@ Options:
   --jobdb TEXT        sqlite3 database to write job info and stats
   --dot_file TEXT     write graph to dot file with this name
   --cores INTEGER     max number of cores to allow jobs to use
-  --umi               To process the data with UMI- Unique Molecular
-                      Identifier
   --scratch TEXT      scratch dir to use
   --help              Show this message and exit.
 
 Commands:
   alascca
   liqbio
-  liqbio-prepare
-
+  liqbio_prepare
 ```
 
-Generate the reference files
------------------------------
+Generate the Reference files using autoseq
 
 `generate-ref` command can be used to generate all required reference files to run the pipeline. 
 
 ```sh
-generate-ref --genome-resources /nfs/PROBIO/genome-resources --outdir /nfs/PROBIO/autoseq-genome
+generate-ref --genome-resources /nfs/ALASCCA/genome-resources --outdir /nfs/ALASCCA/autoseq-genome
 ```
 
+Pipline can be invoked as
 
+Alascca:
 
-LiqBio Pipeline
----------------
+```sh
+autoseq --ref path/to/ref.json --outdir /path/to/outdir --jobdb jobdb.json --cores x --runner_name shellrunner --libdir  /path/to/libdir alascca sample.json
+```
+LiqBio:
 
 ```sh
 autoseq --ref ref.json --outdir /path/to/outdir --jobdb jobdb.json --cores 5 --runner_name slurmrunner --libdir /path/to/libdir liqbio sample.json
-```
-
-*with UMI*
-
-`--umi` flag is used to call UMI pipeline
-
-```sh
-autoseq --ref ref.json --outdir /path/to/outdir --jobdb jobdb.json --cores 5 --runner_name slurmrunner --libdir /path/to/libdir --umi liqbio sample.json
 ```
 
 General Discriptions
@@ -145,11 +136,7 @@ Autoseq knows about the following capture kits:
 * `TT` = `test-regions`
 * `CM` = `monitor`
 * `CP` = `progression`
-* `PC` = `probio_comprehensive`
-* `PB` = `probio_biomarker_signature`
-* `PA` = `pancancer`
 
-Newer version of autoseq has three more panels such as PC, PB and PA.
 
 <b>Liqbio</b>
 
@@ -180,3 +167,4 @@ For the plasma samples, merging of libraries will take place before calling. On 
 Of note is that the library tag (`LB`) does not include the `CAPTUREID` part, to ensure that PCR duplicates are removed correctly. 
 
 If a single prepared samples is exposed to capture twice, to create the libraries `NA12877-T-49-TD1-TT1` and `NA12877-T-49-TD1-TT2` (note different digits in the capture id), read pairs being identical between the two libraries should be considered duplicates since the sample was split after the final PCR step. Therefore, the `LB` for these libraries is set to `NA12877-T-49-TD1`. After merging the bam files, removal of PCR duplicates is done using Picard MarkDuplicates, which will do the right thing. 
+
