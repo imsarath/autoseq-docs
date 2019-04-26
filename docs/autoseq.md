@@ -12,7 +12,7 @@ Piplines
 
 Note:
 
-  **This version of autoseq is specially updated for PROBIO trail on prostate cancer.**
+  **This pipeline is designed for cfDNA  sequencing data from PROBIO trial on prostate cancer.**
 
 Installation
 -------------
