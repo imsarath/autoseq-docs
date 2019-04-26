@@ -8,7 +8,7 @@ Piplines
  * Liqbio *(UMI tag processing)*
  * RNAseq (under development)
 
-*Latest version: [v0.6.0][dist]*
+*Latest version: [v2.0][dist]*
 
 Note:
 

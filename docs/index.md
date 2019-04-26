@@ -1,5 +1,5 @@
-Autoseq: A clinical genomics workflow management platform to analyze next generation sequencing data from cancer samples.
-=========================================================================================================================
+##Autoseq: A clinical genomics workflow management platform to analyze next generation sequencing data from cancer samples.
+
 
 Autoseq system consists of different pipelines that can be used to analyze clinical genomics data generated on Illumina platform. Autoseq pipelines take raw sequencing data (fastq) as input and give an actionable variant report as output (pdf). Alascca and Liqbio are the predominant pipelines used to analyse targeted resequencing data.
 
